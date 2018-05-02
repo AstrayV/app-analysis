@@ -1,6 +1,23 @@
+.DS_Store
+# Logs
+logs
+*.log
+npm-debug.log*
+
 # Dependency directories
 node_modules
 
+# Optional npm cache directory
+.npm
+
+# vscode settings
+.vscode
 
 # Output
 dist
+
+doc
+
+# Local Config
+config/local.json
+.history/*
