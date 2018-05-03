@@ -1,1 +1,0 @@
-{"version":3,"file":"local_db_config.js","sourceRoot":"","sources":["../../src/config/local_db_config.ts"],"names":[],"mappings":";;AAAA,kBAAe;IACX,IAAI,EAAE,OAAO;IACb,IAAI,EAAE,WAAW;IACjB,IAAI,EAAE,IAAI;IACV,QAAQ,EAAE,MAAM;IAChB,QAAQ,EAAE,QAAQ;IAClB,QAAQ,EAAE,YAAY;IACtB,QAAQ,EAAE;QACN,SAAS,GAAG,cAAc;KAE7B;IACD,WAAW,EAAE,IAAI;CACpB,CAAA"}
