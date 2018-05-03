@@ -21,3 +21,8 @@ doc
 # Local Config
 config/local.json
 .history/*
+
+
+yarn-error.log
+
+yarn.lock
