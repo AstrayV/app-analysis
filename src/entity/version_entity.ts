@@ -19,7 +19,8 @@ export class Version_Entity {
     @Column('varchar')
     public introdution: string;
 
-
+    @Column('varchar')
+    public icon_url: string;
 
     @CreateDateColumn()
     public create_at: string;

@@ -36,3 +36,7 @@ const upload_apk = async(ctx:any,next: any)=>{
         imageUrl: imageUrl
     };
 }
+
+const inset_apk_info = async(ctx: any, next:any) =>{
+    
+}

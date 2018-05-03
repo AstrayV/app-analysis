@@ -12,7 +12,7 @@
     "watch-ts": "rm -rf dist && tsc -w",
     "tslint": "tslint -c tslint.json -p tsconfig.json",
     "dev": "cross-env NODE_ENV=dev npm run serve",
-    "prodution": "npm install && tsc &&cross-env NODE_ENV=prodution node dist/server.js"
+    "production": "cross-env NODE_ENV=prodution npm run serve"
   },
   "author": "",
   "license": "ISC",
