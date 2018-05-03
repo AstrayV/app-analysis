@@ -36,23 +36,14 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
-// import * as qiniu from 'qiniu';
-var qiniu = require('qiniu');
-var accessKey = 'QXfK7MdjkHRFe2JdC8A1bkcWz4jYEbs2KOGYN_d6';
-var secretKey = 'j3WMNsCgv65pcS4ged2ounucyxc0WhfXAa-CuTZd';
-qiniu.conf.ACCESS_KEY = accessKey;
-qiniu.conf.SECRET_KEY = secretKey;
+var qiniu_1 = require("../common/qiniu");
 // const mac = new qiniu.auth.digest.Mac(accessKey, secretKey);
-var bucket = 'appmanage';
 exports.get_qiniu_token = function (ctx, next) { return __awaiter(_this, void 0, void 0, function () {
-    var filename, options, putPolicy, uploadToken;
+    var filename, bucket, uploadToken;
     return __generator(this, function (_a) {
         filename = ctx.request.query.filename;
-        options = {
-            scope: bucket + ":" + filename,
-        };
-        putPolicy = new qiniu.rs.PutPolicy(options);
-        uploadToken = putPolicy.uploadToken();
+        bucket = ctx.request.query.bucket;
+        uploadToken = qiniu_1.getQiniuToken(filename, bucket);
         ctx.status = 200;
         ctx.body = {
             token: uploadToken,

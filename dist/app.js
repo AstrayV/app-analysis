@@ -11,10 +11,6 @@ var jwtKoa = require("koa-jwt");
 // import * as jwt from 'jsonwebtoken';
 // import Router from 'koa-router';
 // const verify = util.promisify(jwt.verify);
-// const ApkReader = require('adbkit-apkreader');
-// ApkReader.open('./jingcai.apk')
-//     .then((reader: any) => reader.readManifest())
-//     .then((manifest: any) => console.log(util.inspect(manifest, { depth: null })))
 // read a zip file
 var secret = 'diary secret';
 app.use(cors());

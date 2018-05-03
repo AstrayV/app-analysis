@@ -13,14 +13,6 @@ import * as fs from 'fs';
 // import Router from 'koa-router';
 // const verify = util.promisify(jwt.verify);
 
-// const ApkReader = require('adbkit-apkreader');
-
-
-// ApkReader.open('./jingcai.apk')
-//     .then((reader: any) => reader.readManifest())
-//     .then((manifest: any) => console.log(util.inspect(manifest, { depth: null })))
-
-
 
 
 

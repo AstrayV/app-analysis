@@ -25,6 +25,7 @@
     "@types/koa-router": "^7.0.27",
     "@types/koa2-cors": "^2.0.1",
     "@types/node": "^9.6.2",
+    "@types/shortid": "^0.0.29",
     "adbkit-apkreader": "^3.0.1",
     "apkreader": "^1.0.7",
     "crypto": "^1.0.1",
