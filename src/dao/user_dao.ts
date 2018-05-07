@@ -48,7 +48,21 @@ class User_dao {
         return result;
     }
 
+    find_user_by_id = async (id: number) =>{
+        const userRepository = getRepository(User_Entity);
+        const result = await userRepository.findOneById(id);
+        return result;
+    }
 
+    change_password = async(id: number, newPwd: string) =>{
+        const changeRes = await getConnection()
+        .createQueryBuilder()
+        .update(User_Entity)
+        .set({password: newPwd})
+        .where("id =:id", { id: id })
+        .execute();
+        return changeRes;
+    }
 
     delete_user = async (id: number) => {
         const result = await getConnection()

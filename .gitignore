@@ -26,3 +26,14 @@ config/local.json
 yarn-error.log
 
 yarn.lock
+
+
+
+#文件存储
+#src/android_app
+
+#src/android_icon
+
+#src/ios_app
+
+#src/ios_icon

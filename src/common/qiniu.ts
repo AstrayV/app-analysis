@@ -19,25 +19,28 @@ export const getQiniuToken = (filename: string, bucket: string) => {
     const uploadToken = putPolicy.uploadToken();
     return uploadToken;
 }
-
+interface qiniuRes {
+    hash: string,
+    key: string
+}
 /**
  * 
  * @param file 文件路径
  * @param uploadToken token
  * @param key 文件名
  */
-export const upload_file = (file: string, uploadToken: string, key: string) => {
-    const config = new qiniu.conf.Config();
-    config.zone = qiniu.zone.Zone_z2;
-    const formUploader = new qiniu.form_up.FormUploader(config);
-    const putExtra = new qiniu.form_up.PutExtra();
-    return new Promise((res, rej) => {
+export const upload_file = async(uploadToken: string, key: string, file: string, ) => {
+    const result = await new Promise<qiniuRes>((res, rej) => {
+        const config = new qiniu.conf.Config();
+        config.zone = qiniu.zone.Zone_z2;
+        const formUploader = new qiniu.form_up.FormUploader(config);
+        const putExtra = new qiniu.form_up.PutExtra();
         formUploader.putFile(uploadToken, key, file, putExtra, (respErr: any,
-            respBody: any, respInfo: any)=> {
+            respBody: any, respInfo: any) => {
             if (respErr) {
                 throw respErr;
             }
-            if (respInfo.statusCode == 200) {
+            if (respInfo.statusCode === 200) {
                 res(respBody)
             } else {
                 console.log(respInfo.statusCode);
@@ -45,4 +48,5 @@ export const upload_file = (file: string, uploadToken: string, key: string) => {
             }
         });
     })
+    return result;
 }

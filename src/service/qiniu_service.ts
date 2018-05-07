@@ -14,7 +14,7 @@ export const get_qiniu_token = async (ctx: any, next: any) => {
 	ctx.status = 200;
 	ctx.body = {
 		token: uploadToken,
-		bucket_url: 'p82y2n3wo.bkt.clouddn.com'
+		bucket_url: 'http://p82y2n3wo.bkt.clouddn.com'
 	};
 }
 
