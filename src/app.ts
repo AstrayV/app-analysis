@@ -7,6 +7,7 @@ import UploadAppRouter from './controller/upload_app_controller';
 import * as bodyParser from 'koa-bodyparser';
 import * as jwtKoa from 'koa-jwt';
 import * as util from 'util';
+
 // var log4js = require('log4js');
 import * as fs from 'fs';
 
@@ -24,9 +25,29 @@ import * as fs from 'fs';
 
 const secret = 'diary secret';
 app.use(cors());
+app.use(async(ctx, next) => {
+	try {
+	  ctx.error = (code: any, message: any) => {
+		if (typeof code === 'string') {
+		  message = code;
+		  code = 500;
+		}
+		ctx.throw(code || 500, message || '服务器错误');
+	  };
+	  await next();
+	} catch (e) {
+	  let status = e.status || 500;
+	  let message = e.message || '服务器错误';
+	  ctx.response.body = { status, message };
+   
+	}
+  });
 app.use(bodyParser());
+const rootPath = process.cwd();
+
+app.use(require('koa-static')(rootPath + '/plist'));
 app.use(jwtKoa({ secret }).unless({
-	path: ['/login', '/signup',/^\/downloadcount/,/^\/info/]
+	path: ['/login', '/signup',/^\/downloadcount/,/^\/info/,/^\/plist/]
 }))
 
 app.use(userRouter.routes());
