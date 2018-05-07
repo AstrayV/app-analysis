@@ -1,7 +1,7 @@
 const extract = require('ipa-extract-info');
 import * as fs from 'fs';
 // import * as pngdefry from 'pngdefry'
-const pngdefry = require('pngdefry');
+// const pngdefry = require('pngdefry');
 const JSZip = require("jszip");
 
 interface ios_read_params{
@@ -19,17 +19,17 @@ interface appInfo {
 const rootPath = process.cwd();
 
 
-const exchangePng = (input:string,output: string)=>{
-	return new Promise((res,rej) =>{
-		pngdefry(input,output,function(err:any){
-			if(err){
+// const exchangePng = (input:string,output: string)=>{
+// 	return new Promise((res,rej) =>{
+// 		pngdefry(input,output,function(err:any){
+// 			if(err){
 
-				return
-			}
-			res(output)
-		})
-	})
-}
+// 				return
+// 			}
+// 			res(output)
+// 		})
+// 	})
+// }
 
 const readIos = async (filePath: string) => {
 	return new Promise<appInfo>(async(resolve,reject) =>{
@@ -68,7 +68,7 @@ const readIos = async (filePath: string) => {
 			const iconPath = `${rootPath}/static/${appInfo.name}ipa${appInfo.version}-icon.png`;
 			// const newPath = `${rootPath}/static/${appInfo.name}ipa${appInfo.version}-icon-new.png`;
 			fs.writeFileSync(iconPath, d);
-			await exchangePng(iconPath,iconPath);
+			// await exchangePng(iconPath,iconPath);
 			// console.log('getios',`${rootPath}/static/${appInfo.name}ipa${appInfo.version}-icon.png`)
 			resolve({
 				name: appInfo.name,
