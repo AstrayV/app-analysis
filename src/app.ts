@@ -15,7 +15,7 @@ import * as fs from 'fs';
 // import Router from 'koa-router';
 // const verify = util.promisify(jwt.verify);
 
-
+const rootPath = process.cwd();
 
 
 
@@ -25,6 +25,7 @@ import * as fs from 'fs';
 
 const secret = 'diary secret';
 app.use(cors());
+app.use(require('koa-static')(rootPath + '/plist'));
 app.use(async(ctx, next) => {
 	try {
 	  ctx.error = (code: any, message: any) => {
@@ -43,9 +44,9 @@ app.use(async(ctx, next) => {
 	}
   });
 app.use(bodyParser());
-const rootPath = process.cwd();
 
-app.use(require('koa-static')(rootPath + '/plist'));
+
+
 app.use(jwtKoa({ secret }).unless({
 	path: ['/login', '/signup',/^\/downloadcount/,/^\/info/,/^\/plist/]
 }))
