@@ -8,7 +8,7 @@ import server_db_config from './config/server_db_config';
 
 let db_config;
 
-
+console.log('环境变量', process.env.NODE_ENV);
 switch(process.env.NODE_ENV){
     case 'dev':
         db_config = local_db_config;
@@ -16,10 +16,9 @@ switch(process.env.NODE_ENV){
     case 'production':
         db_config = server_db_config;
         break;
-    default:
-        db_config = local_db_config;
 }
-console.log('环境变量', process.env.NODE_ENV);
+console.log(db_config);
+
 // console.log( '../' + __dirname + "/entity/*.ts")
 createConnection({
     type: "mysql",
