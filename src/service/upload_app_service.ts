@@ -10,6 +10,8 @@ import { getQiniuToken, upload_file } from '../common/qiniu';
 import qiniu_config from '../config/qiniu_config';
 import Version_Dao from '../dao/upload_app_dao';
 import * as _ from 'lodash';
+import makePlist from '../common/makeplist';
+
 const qiniu = require('qiniu');
 
 
@@ -20,6 +22,7 @@ interface info {
     version: string,
     icon: string,
     iconPath: string,
+    identifier?: string,
 }
 
 /**
@@ -92,6 +95,17 @@ const upload_apk = async (ctx: any, next: any) => {
                 avatarPath
             );
         console.log(qiniuRes);
+
+        let plist:string;
+        
+        // if(appType === 1){
+        //     const plistData = await makePlist({
+        //         name: info.name,
+        //         version: info.version,
+        //         icon: imageUrl,
+
+        //     })
+        // }
         const bucket_url = qiniu_config.icon_bucket_url;
         const imageUrl = bucket_url + '/' + qiniuRes.key;
         console.log(imageUrl)
@@ -104,7 +118,8 @@ const upload_apk = async (ctx: any, next: any) => {
             version: info.version,
             imageUrl:' http://' + imageUrl,
             type: appType,
-            introdution: introdution
+            introdution: introdution,
+            identifier: appType === 1 ? info.identifier : '', 
         };
     }
 }
@@ -156,12 +171,15 @@ interface insert_params {
     introdution: string,
     icon_url: string,
     type: number,
-    version: string
+    version: string,
+    identifier?: string
 }
 const inset_apk_info = async (ctx: any, next: any) => {
     const params: insert_params = ctx.request.body;
+
     const result = await Version_Dao.upload_version(params);
     if (result.affectedRows > 0) {
+        
         ctx.status = 200;
     } else {
         ctx.status = 400;

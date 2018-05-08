@@ -1,5 +1,6 @@
 const extract = require('ipa-extract-info');
 import * as fs from 'fs';
+import { PromiseUtils } from 'typeorm';
 // import * as pngdefry from 'pngdefry'
 // const pngdefry = require('pngdefry');
 const JSZip = require("jszip");
@@ -8,6 +9,7 @@ interface ios_read_params{
 	name: string,
 	version: string,
 	icon: string,
+	identifier: string
 }
 
 interface appInfo {
@@ -15,6 +17,7 @@ interface appInfo {
 	version: string,
 	icon: string,
 	iconPath: string,
+	identifier?: string
 }
 const rootPath = process.cwd();
 
@@ -30,6 +33,8 @@ const rootPath = process.cwd();
 // 		})
 // 	})
 // }
+
+
 
 const readIos = async (filePath: string) => {
 	return new Promise<appInfo>(async(resolve,reject) =>{
@@ -47,6 +52,7 @@ const readIos = async (filePath: string) => {
 						name: info[0].CFBundleDisplayName,
 						version: info[0].CFBundleShortVersionString,
 						icon: iconArr[iconArr.length - 1],
+						identifier: info[0].CFBundleIdentifier,
 					}
 					res(appInfo)
 				});
@@ -74,19 +80,9 @@ const readIos = async (filePath: string) => {
 				name: appInfo.name,
 				version: appInfo.version,
 				icon: appInfo.icon,
-				iconPath: iconPath
+				iconPath: iconPath,
+				identifier: appInfo.identifier,
 			})
-			// zip.loadAsync(data, { createFolders: true }).then((content: any) => {
-			// 	const files = content.files;
-			// 	const fileArr = Object.keys(files);
-			// 	const { icon } = appInfo;
-			// 	const iconArr = fileArr.filter((value) => {
-			// 		return value.indexOf(icon) > -1
-			// 	})
-			// 	zip.file(`${iconArr[iconArr.length - 1]}`).async('nodebuffer').then((d: any) => {
-			// 		fs.writeFileSync(`${rootPath}/static/${appInfo.name}ipa${appInfo.version}-icon.png`, d);
-			// 	})
-			// })
 		});
 	})
 

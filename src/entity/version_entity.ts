@@ -43,6 +43,13 @@ export class Version_Entity {
     @Column('int')
     public size: number;
 
+    @Column({
+        type: 'varchar',
+        default: ''
+    })
+    public plist: string;
+
+
     @CreateDateColumn({
         length: 0
     })

@@ -4,6 +4,8 @@ import { Version_Entity } from '../entity/version_entity';
 
 import * as _ from 'lodash';
 
+import makePlist from '../common/makeplist';
+
 interface insert_params {
     app_url: string,
     name: string,
@@ -11,7 +13,9 @@ interface insert_params {
     introdution: string,
     icon_url: string,
     type: number
-    version: string
+    version: string,
+    identifier?: string,
+    plist?: string,
 }
 interface find_params {
     name: string,
@@ -39,7 +43,17 @@ class Version_Dao {
         const { name, version ,type} = params;
         const result = await getRepository(Version_Entity).findOne({ name: name, version: version ,type: type});
         if (result) {
-            console.log(result);
+
+            let plist:string
+            if(params.type ===1){
+                plist = await makePlist({
+                    url: params.app_url,
+                    name: params.name,
+                    icon: params.icon_url,
+                    version: params.version,
+                    identifier: params.identifier
+                });
+            }
             const newValue = {
                 app_url: params.app_url,
                 name: params.name,
@@ -47,8 +61,8 @@ class Version_Dao {
                 introdution: params.introdution,
                 icon_url: params.icon_url,
                 built_times: result.built_times + 1,
+                plist: plist,
             };
-            console.log(newValue);
             const resValue = await getConnection()
                 .createQueryBuilder()
                 .update(Version_Entity)
@@ -57,11 +71,25 @@ class Version_Dao {
                 .execute();
             return resValue;
         } else {
+            const newValue = _.cloneDeep(params);
+            let plist:string
+            if(params.type ===1){
+                plist = await makePlist({
+                    url: params.app_url,
+                    name: params.name,
+                    icon: params.icon_url,
+                    version: params.version,
+                    identifier: params.identifier
+                });
+                newValue.plist = plist
+            };
+            
+            
             const resValue = await getConnection()
                 .createQueryBuilder()
                 .insert()
                 .into(Version_Entity)
-                .values([params])
+                .values([newValue])
                 .execute();
             return resValue;
         }
@@ -109,7 +137,7 @@ class Version_Dao {
             .execute();
         return result;
     }
-
+    //
     async get_download_info(code: string) {
         const result = await getRepository(Version_Entity).createQueryBuilder()
             .select("code")
@@ -122,6 +150,7 @@ class Version_Dao {
             .addSelect("download_times")
             .addSelect("built_times")
             .addSelect("size")
+            .addSelect('plist')
             .addSelect("DATE_FORMAT(update_at,'%Y-%m-%d %H:%i:%s') as update_at")
             .where("code =:code", { code: code })
             .execute();

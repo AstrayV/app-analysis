@@ -9,6 +9,7 @@ interface appInfo{
 	version: string,
     icon: string,
     iconPath: string,
+    identifier?: string
 }
 
 const rootPath = process.cwd();
