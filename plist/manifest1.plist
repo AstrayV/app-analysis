@@ -29,13 +29,13 @@
 <key>metadata</key>  
 <dict>  
 <key>bundle-identifier</key>  
-<string>com.bojing.webapp.fiasd</string>  
+<string>com.bojing.webapp.fixed001</string>  
 <key>bundle-version</key>  
-<string>1.0</string>  
+<string>1</string>  
 <key>kind</key>  
 <string>software</string>  
 <key>title</key>  
-<string>鲸彩1</string>  
+<string>鲸彩</string>  
 </dict>  
 </dict>  
 </array>  
