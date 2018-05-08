@@ -1,6 +1,6 @@
 export default {
     type: "mysql",
-    host: "120.78.131.37",
+    host: "localhost",
     port: 3306,
     username: "nong",
     password: "hzx123",
