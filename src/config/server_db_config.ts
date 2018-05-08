@@ -3,7 +3,7 @@ export default {
     host: "localhost",
     port: 3306,
     username: "root",
-    password: "kmcx110",
+    password: "110",
     database: "app_manage",
     entities: [
         __dirname + "/entity/*.js"
