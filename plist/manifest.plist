@@ -17,13 +17,13 @@
 	<key>kind</key>
 	<string>display-image</string>
 	<key>url</key>
-	<string>https://appstore-api.uucweb.com/AppIcon20x20@2x.png</string>
+	<string>http://p84qlgp8q.bkt.clouddn.com/%E9%B2%B8%E5%BD%A9apk1.0-icon</string>
 </dict>
 <dict>
 	<key>kind</key>
 	<string>full-size-image</string>
 	<key>url</key>
-	<string>https://appstore-api.uucweb.com/AppIcon60x60@3x.png</string>
+	<string>http://p84qlgp8q.bkt.clouddn.com/%E9%B2%B8%E5%BD%A9ipa1.0-icon</string>
 </dict>
 </array>  
 <key>metadata</key>  
