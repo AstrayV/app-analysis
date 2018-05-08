@@ -29,9 +29,9 @@
 <key>metadata</key>  
 <dict>  
 <key>bundle-identifier</key>  
-<string>com.bojing.webapp.Ios8fix</string>  
+<string>com.bojing.webapp</string>  
 <key>bundle-version</key>  
-<string>1.0</string>  
+<string>1.1</string>  
 <key>kind</key>  
 <string>software</string>  
 <key>title</key>  
