@@ -51,7 +51,8 @@ class Version_Dao {
                     name: params.name,
                     icon: params.icon_url,
                     version: params.version,
-                    identifier: params.identifier
+                    identifier: params.identifier,
+                    code: params.code
                 });
             }
             const newValue = {
@@ -79,7 +80,8 @@ class Version_Dao {
                     name: params.name,
                     icon: params.icon_url,
                     version: params.version,
-                    identifier: params.identifier
+                    identifier: params.identifier,
+                    code: params.code
                 });
                 newValue.plist = plist
             };

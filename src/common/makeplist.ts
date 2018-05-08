@@ -4,7 +4,7 @@ interface plistParams {
 	name: string,
 	identifier: string,
 	version: string,
-	
+	code: string,
 }
 
 import * as fs from 'fs';
@@ -54,7 +54,7 @@ const makePlist = (plistParams: plistParams) =>{
 		</array>  
 		</dict>  
 		</plist>`
-		const plistPath = `${plistParams.name}-${plistParams.version}.plist`;
+		const plistPath = `${plistParams.code}.plist`;
 		fs.writeFileSync(rootPath+ '/plist/' + plistPath,str);
 		res(plistPath);
 	});
