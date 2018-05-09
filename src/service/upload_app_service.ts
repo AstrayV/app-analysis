@@ -178,7 +178,7 @@ const inset_apk_info = async (ctx: any, next: any) => {
     const params: insert_params = ctx.request.body;
 
     const result = await Version_Dao.upload_version(params);
-    if (result.affectedRows > 0) {
+    if (result) {
         
         ctx.status = 200;
     } else {

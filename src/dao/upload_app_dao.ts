@@ -42,7 +42,7 @@ class Version_Dao {
     async upload_version(params: insert_params) {
         const { name, version ,type} = params;
         const result = await getRepository(Version_Entity).findOne({ name: name, version: version ,type: type});
-        if (result) {
+        // if (result) {
 
             let plist:string
             if(params.type ===1){
@@ -64,37 +64,38 @@ class Version_Dao {
                 built_times: result.built_times + 1,
                 plist: plist,
             };
-            const resValue = await getConnection()
-                .createQueryBuilder()
-                .update(Version_Entity)
-                .set(newValue)
-                .where("code =:code", { code: result.code })
-                .execute();
-            return resValue;
-        } else {
-            const newValue = _.cloneDeep(params);
-            let plist:string
-            if(params.type ===1){
-                plist = await makePlist({
-                    url: params.app_url,
-                    name: params.name,
-                    icon: params.icon_url,
-                    version: params.version,
-                    identifier: params.identifier,
-                    code: params.code
-                });
-                newValue.plist = plist
-            };
+            const resValue = await getRepository(Version_Entity).save(newValue)
+            // const resValue = await getConnection()
+            //     .createQueryBuilder()
+            //     .update(Version_Entity)
+            //     .set(newValue)
+            //     .where("code =:code", { code: result.code })
+            //     .execute();
+            // return resValue;
+        // } else {
+        //     const newValue = _.cloneDeep(params);
+        //     let plist:string
+        //     if(params.type ===1){
+        //         plist = await makePlist({
+        //             url: params.app_url,
+        //             name: params.name,
+        //             icon: params.icon_url,
+        //             version: params.version,
+        //             identifier: params.identifier,
+        //             code: params.code
+        //         });
+        //         newValue.plist = plist
+        //     };
             
             
-            const resValue = await getConnection()
-                .createQueryBuilder()
-                .insert()
-                .into(Version_Entity)
-                .values([newValue])
-                .execute();
-            return resValue;
-        }
+        //     const resValue = await getConnection()
+        //         .createQueryBuilder()
+        //         .insert()
+        //         .into(Version_Entity)
+        //         .values([newValue])
+        //         .execute();
+        //     return resValue;
+        // }
     }
 
     async find_app_list(query: list_query) {

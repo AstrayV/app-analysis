@@ -50,14 +50,10 @@ export class Version_Entity {
     public plist: string;
 
 
-    @CreateDateColumn({
-        length: 0
-    })
+    @CreateDateColumn()
     public create_at: Date;
 
-    @UpdateDateColumn({
-        length: 0
-    })
+    @UpdateDateColumn()
     public update_at: Date;
     
     // @OneToOne(type => Apartment, apartment => apartment.id)
