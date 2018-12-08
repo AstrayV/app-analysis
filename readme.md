@@ -1,12 +1,12 @@
-##keyword:
+## keyword:
 koa2、 typescript、 typeorm、 mysql 、qiniu、 jwt 、aapt.
 
 
-##modules 
+## modules 
 用户模块、 app版本管理模块、 上传模块. (还有其他什么模块我忘了)
 
 
-##主要功能
+## 主要功能
 
 * 解析apk ipa 文件获取 app名称、 app图标、 app版本 ,etc.
 * 登录注册
@@ -25,7 +25,7 @@ koa2、 typescript、 typeorm、 mysql 、qiniu、 jwt 、aapt.
 
 
 
-#dev 启动
+# dev 启动
 
 npm install 
 
